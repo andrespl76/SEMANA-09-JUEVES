@@ -64,15 +64,17 @@ $_SESSION['registros'][] = [
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($_SESSION['registros'] as $index => $reg): ?>
+                <?php 
+                // Aquí usamos el operador null coalescing (??) por si hay registros viejos en la sesión
+                foreach ($_SESSION['registros'] as $index => $reg): 
+                ?>
                 <tr>
                     <td><?= $index + 1 ?></td>
-                    <!-- Uso de htmlspecialchars para blindar contra XSS -->
-                    <td><?= htmlspecialchars($reg['nombre'], ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= htmlspecialchars($reg['correo'], ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= htmlspecialchars($reg['telefono'], ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= htmlspecialchars($reg['asunto'], ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= htmlspecialchars($reg['mensaje'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($reg['nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($reg['correo'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($reg['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($reg['asunto'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($reg['mensaje'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
